@@ -1,0 +1,145 @@
+body {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", serif !important;
+  font-optical-sizing: auto !important;
+  font-weight: 500 !important;
+  font-style: normal !important;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.fas {
+  font-size: 2rem;
+  color: #fe424d;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 5px;
+  background-color: rgb(225, 206, 206);
+}
+
+.icons,
+.name,
+.terms {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  color: black;
+}
+
+.icons i {
+  font-size: 2rem;
+  margin-left: 5px;
+}
+
+.name {
+  margin-top: 5px;
+  ;
+}
+
+.shops-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 45px;
+  padding: 20px;
+  padding-top: 30px;
+}
+
+.shop-card {
+  width:380px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  height: 300px;
+  display: flex;
+}
+.shopImage {
+  width: 400px;
+  height: 100%;
+  object-fit: cover;
+  flex: 1;
+}
+
+.shimmer-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  gap: 10px;
+  margin-left: 130px;
+}
+
+.shimmer-card {
+  width: 380px;
+  height: 300px;
+  border-radius: 10px;
+  background: linear-gradient( 90deg,#e0e0e0 25%,#f5f5f5 50%,#e0e0e0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite linear;
+}
+.shimmer-cards{
+  width: 350px;
+  height: 300px;
+  border-radius: 10px;
+  background: linear-gradient( 90deg,#e0e0e0 25%,#f5f5f5 50%,#e0e0e0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite linear;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+.fa-solid {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.fa-solid:hover {
+  background-color:#007bff;
+  cursor: pointer;
+}
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+  background: #fefefe;
+  cursor: pointer;
+}
+.btn-custom {
+  transition: 0.3s ease;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  color: white;
+}
+
+.btn-custom:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+  opacity: 0.9;
+}
+.fixed-image {
+  position: fixed;
+  top: 70px; 
+  right: 0;
+  width: 300px;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
