@@ -29,7 +29,10 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
-
+app.use((req,res,next)=>{
+  console.log(req.url)
+  next()
+})
 app.use("/users",userRouter)
 app.use("/techShops",shopRouter)
 app.use("/techShops",techRouter)

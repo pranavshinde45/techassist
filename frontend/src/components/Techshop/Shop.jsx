@@ -129,36 +129,33 @@ function Shop() {
               </div>
             </div>
           </div>
-          <div
-            style={{
-              border: '1px solid #ddd', borderRadius: '10px', width: '400px', height: '500px', padding: '20px', boxShadow: '6px 4px 12px rgba(0, 0, 0, 0.1)', backgroundColor: '#fff', marginTop: '60px',
-            }}
-          >
-            <div style={{ borderBottom: '1px solid #eee', marginBottom: '10px', paddingBottom: '10px' }}>
-              <h5 style={{ margin: 0 }}>Contact Us</h5>
-              <p style={{ margin: 0 }}>{shopDetails.contact}</p>
+          <div className="shop-card2">
+            <div className="shop-header">
+              <h5>Contact Us</h5>
+              <p>{shopDetails.contact}</p>
             </div>
-            <div className="d-flex justify-content-between mb-3">
+
+            <div className="shop-timings">
               <div>Open: 9 AM</div>
               <div>Close: 10 PM</div>
             </div>
+
             <hr />
-            <div className="text-center d-flex justify-content-around">
+
+            <div className="shop-actions">
               <Link to={`/bookings/${id}/createBooking`}>
-                <button style={{ backgroundColor: '#007bff', color: '#fff', borderRadius: "5px", border: 'none', height: "40px" }}>
-                  Book an appointment
-                </button>
+                <button className="btn-primary">Book an appointment</button>
               </Link>
+
               <Link to={`/booking/${id}`}>
-                <button style={{ backgroundColor: '#007bff', color: '#fff', borderRadius: "5px", border: 'none', height: "40px" }}>
-                  See details
-                </button>
+                <button className="btn-primary">See details</button>
               </Link>
             </div>
+
             <img
               src="/techAccessories.jpg"
               alt="Accessories"
-              style={{ width: '100%', marginTop: '20px', borderRadius: '8px', height: '280px' }}
+              className="shop-image"
             />
           </div>
         </div>

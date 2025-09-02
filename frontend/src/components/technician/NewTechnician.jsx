@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function NewTechnician() {
     let { id } = useParams()
@@ -43,6 +44,11 @@ function NewTechnician() {
     }
     return (
         <div className='container d-flex justify-content-center align-items-center p-5 m-4'>
+            <div style={{ height: '100px', width: '100px', position: 'fixed', top: '70px', left: '5px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '8px' }}>
+                <Link to="/" style={{ color: 'black' }}>
+                    <i className="fa-solid fa-backward-step"></i>
+                </Link>
+            </div>
             <div className='card p-4 shadow-lg w-100' style={{ maxWidth: '600px' }}>
                 <h3 className='text-center mb-4 text-primary'><i>Create a Technician</i></h3>
                 <form ref={formRef} className="needs-validation" noValidate onSubmit={handleSubmit}>

@@ -10,17 +10,29 @@ function ShowBooking() {
     const { id } = useParams();
 
     const role = localStorage.getItem("role");
+    const token=localStorage.getItem("token")
 
     useEffect(() => {
         async function getDetails() {
             try {
                 let res;
                 if (role === 'owner') {
-                    res = await axios.get(`http://localhost:8000/techShops/${id}/booking`);
+                    res = await axios.get(`http://localhost:8000/techShops/${id}/booking`, {
+                        headers: {
+                            "Content-Type": "multipart/form-data",
+                            "Authorization": `Bearer ${token}`
+                        }
+                    });
+                    console.log(res)
                     setShop(res.data.message?.name || "");
                     setBookingDetails(res.data.message?.booking || []);
                 } else {
-                    res = await axios.get(`http://localhost:8000/techShops/${id}/booking/user/${currUser}`);
+                    res = await axios.get(`http://localhost:8000/techShops/${id}/booking/user/${currUser}`,{
+                        headers: {
+                            "Content-Type": "multipart/form-data",
+                            "Authorization": `Bearer ${token}`
+                        }
+                    });
                     setShop(res.data.shopName || "");
                     setBookingDetails(res.data.booking || []);
                 }
@@ -37,7 +49,12 @@ function ShowBooking() {
 
     const handleDelete = async (bookingId) => {
         try {
-            await axios.delete(`http://localhost:8000/techShops/${id}/booking/${bookingId}`);
+            await axios.delete(`http://localhost:8000/techShops/${id}/booking/${bookingId}`,{
+                headers: {
+                            "Content-Type": "multipart/form-data",
+                            "Authorization": `Bearer ${token}`
+                        }
+            });
             setBookingDetails(prev => prev.filter(booking => booking._id !== bookingId));
         } catch (err) {
             console.log(err);
@@ -96,16 +113,7 @@ function ShowBooking() {
                     )}
                 </div>
             </div>
-
-            <div className="d-none d-md-block col-md-4 p-0 fixed-image">
-                <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9vlXSgPKp4qkJBTdWgsP2X2zj0S1_rNuC_w&s"
-                    alt="tech"
-                    className="img-fluid h-100 w-100 object-fit-cover sticky-top"
-                    style={{ objectFit: 'cover' }}
-                />
-            </div>
-            <div style={{ height: '300px' }}></div><br/><br/><br/><br/><br/><br/><br/>
+            <div style={{ height: '300px' }}></div><br /><br /><br /><br /><br /><br /><br />
         </div>
     );
 }
