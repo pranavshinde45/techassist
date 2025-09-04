@@ -22,10 +22,22 @@ const io = socketIo(server, {
   },
 });
 
+const allowedOrigins = [
+  "http://localhost:3000", // local dev
+  "https://techassist-git-main-pranav-shindes-projects-9da17069.vercel.app" // deployed frontend
+];
+
 const corsOptions = {
-  origin: "http://localhost:3000",
-  credentials: true, 
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
 };
+
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
