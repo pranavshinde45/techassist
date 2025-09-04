@@ -77,6 +77,11 @@ io.on("connection", (socket) => {
   });
 });
 
+app.get("/", (req, res) => {
+  res.send("Backend is running 🚀");
+});
+
+
 server.listen(port, () => {
   console.log("Server running on port ",port);
 });
