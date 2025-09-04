@@ -41,7 +41,7 @@ function NewShop() {
         setIsLoading(true);
         const token=localStorage.getItem("token")
         try {
-            const res = await axios.post("http://localhost:8000/techShops/createShop", data, {
+            const res = await axios.post("https://techassist-9iyg.onrender.com/techShops/createShop", data, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     "Authorization":`Bearer ${token}`

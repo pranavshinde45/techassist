@@ -17,7 +17,7 @@ function ShowBooking() {
             try {
                 let res;
                 if (role === 'owner') {
-                    res = await axios.get(`http://localhost:8000/techShops/${id}/booking`, {
+                    res = await axios.get(`https://techassist-9iyg.onrender.com/techShops/${id}/booking`, {
                         headers: {
                             "Content-Type": "multipart/form-data",
                             "Authorization": `Bearer ${token}`
@@ -27,7 +27,7 @@ function ShowBooking() {
                     setShop(res.data.message?.name || "");
                     setBookingDetails(res.data.message?.booking || []);
                 } else {
-                    res = await axios.get(`http://localhost:8000/techShops/${id}/booking/user/${currUser}`,{
+                    res = await axios.get(`https://techassist-9iyg.onrender.com/techShops/${id}/booking/user/${currUser}`,{
                         headers: {
                             "Content-Type": "multipart/form-data",
                             "Authorization": `Bearer ${token}`
@@ -49,7 +49,7 @@ function ShowBooking() {
 
     const handleDelete = async (bookingId) => {
         try {
-            await axios.delete(`http://localhost:8000/techShops/${id}/booking/${bookingId}`,{
+            await axios.delete(`https://techassist-9iyg.onrender.com/techShops/${id}/booking/${bookingId}`,{
                 headers: {
                             "Content-Type": "multipart/form-data",
                             "Authorization": `Bearer ${token}`

@@ -13,7 +13,7 @@ function Dashboard() {
 
   useEffect(() => {
     const getData = async () => {
-      const res = await axios.get("http://localhost:8000/techShops/getAllShops");
+      const res = await axios.get("https://techassist-9iyg.onrender.com/techShops/getAllShops");
       console.log(res.data.allShops)
       setShops(res.data.allShops);
     };

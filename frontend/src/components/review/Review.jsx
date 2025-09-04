@@ -19,7 +19,7 @@ function Review({ shopId, setReviews, setReviewsLoading }) {
       setSubmitting(true);
       setReviewsLoading(true);
       const res = await axios.post(
-        `http://localhost:8000/techShops/${shopId}/review`,
+        `https://techassist-9iyg.onrender.com/techShops/${shopId}/review`,
         { rating, comment },
         {
           headers: {
@@ -30,7 +30,7 @@ function Review({ shopId, setReviews, setReviewsLoading }) {
       console.log('POST review API response:', res.data);
 
       // Re-fetch reviews to ensure state is synchronized with the database
-      const reviewsRes = await axios.get(`http://localhost:8000/techShops/${shopId}/review`);
+      const reviewsRes = await axios.get(`https://techassist-9iyg.onrender.com/techShops/${shopId}/review`);
       console.log('Fetched reviews after POST:', reviewsRes.data);
       const reviews = Array.isArray(reviewsRes.data.shopReviews)
         ? reviewsRes.data.shopReviews

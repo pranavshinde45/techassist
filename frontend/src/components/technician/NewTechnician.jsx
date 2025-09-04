@@ -27,7 +27,7 @@ function NewTechnician() {
         const create = async () => {
             try {
                 const token = localStorage.getItem("token")
-                const res = await axios.post(`http://localhost:8000/techShops/${id}/technicians`, {
+                const res = await axios.post(`https://techassist-9iyg.onrender.com/techShops/${id}/technicians`, {
                     name, contact, qualification
                 }, {
                     headers: {

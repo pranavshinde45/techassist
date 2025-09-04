@@ -40,7 +40,7 @@ function Signup() {
         if (!isValid) return;
 
         try {
-            const res = await axios.post("http://localhost:8000/users/signup", {
+            const res = await axios.post("https://techassist-9iyg.onrender.com/users/signup", {
                 username: username,
                 email: email,
                 password: password,

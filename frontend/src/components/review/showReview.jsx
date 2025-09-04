@@ -7,7 +7,7 @@ function ShowReview({ shopId, reviews, setReviews }) {
   const handleDelete = async (reviewId) => {
     const token = localStorage.getItem("token")
     try {
-      await axios.delete(`http://localhost:8000/techShops/${shopId}/review/${reviewId}`, {
+      await axios.delete(`https://techassist-9iyg.onrender.com/techShops/${shopId}/review/${reviewId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

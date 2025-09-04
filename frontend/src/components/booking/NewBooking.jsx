@@ -50,7 +50,7 @@ function NewBooking() {
     const data = { ...formData, shopId: id };
 
     try {
-      const res = await axios.post(`http://localhost:8000/techShops/${id}/booking`, data, {
+      const res = await axios.post(`https://techassist-9iyg.onrender.com/techShops/${id}/booking`, data, {
         headers: { Authorization: `Bearer ${token}` }
       });
       navigate(`/shop/${id}`);

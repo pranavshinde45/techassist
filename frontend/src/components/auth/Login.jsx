@@ -33,7 +33,7 @@ function Login() {
         event.preventDefault();
 
         try {
-            const res = await axios.post("http://localhost:8000/users/login", {
+            const res = await axios.post("https://techassist-9iyg.onrender.com/users/login", {
                 username: username,
                 password: password,
             })

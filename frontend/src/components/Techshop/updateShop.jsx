@@ -14,7 +14,7 @@ function UpdateShop() {
     useEffect(() => {
         async function fetch() {
             try {
-                const res = await axios.get(`http://localhost:8000/techShops/getShop/${id}`);
+                const res = await axios.get(`https://techassist-9iyg.onrender.com/techShops/getShop/${id}`);
                 const shop = res.data.shop;
                 setFormData({
                     name: shop.name,
@@ -66,7 +66,7 @@ function UpdateShop() {
 
         try {
             const res = await axios.put(
-                `http://localhost:8000/techShops/updateShop/${id}`,
+                `https://techassist-9iyg.onrender.com/techShops/updateShop/${id}`,
                 data,
                 {
                     headers: {

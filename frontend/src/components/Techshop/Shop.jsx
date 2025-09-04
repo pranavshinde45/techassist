@@ -21,10 +21,10 @@ function Shop() {
     const fetchData = async () => {
       try {
         setReviewsLoading(true);
-        const shopRes = await axios.get(`http://localhost:8000/techShops/getShop/${id}`);
+        const shopRes = await axios.get(`https://techassist-9iyg.onrender.com/techShops/getShop/${id}`);
         setShopDetails(shopRes.data.shop);
 
-        const reviewsRes = await axios.get(`http://localhost:8000/techShops/${id}/review`);
+        const reviewsRes = await axios.get(`https://techassist-9iyg.onrender.com/techShops/${id}/review`);
         console.log('Shop fetched reviews:', reviewsRes.data);
         const reviews = Array.isArray(reviewsRes.data.shopReviews)
           ? reviewsRes.data.shopReviews
@@ -45,7 +45,7 @@ function Shop() {
   useEffect(() => {
     async function get() {
       try {
-        const technician = await axios.get(`http://localhost:8000/techShops/${id}/technicians`)
+        const technician = await axios.get(`https://techassist-9iyg.onrender.com/techShops/${id}/technicians`)
         console.log(technician.data.message)
         setTechnician(technician?.data?.message)
       } catch (err) {
@@ -61,7 +61,7 @@ function Shop() {
   const handleDelete = async () => {
     const token = localStorage.getItem("token")
     try {
-      const deleteShop = await axios.delete(`http://localhost:8000/techShops/deleteShop/${shopDetails._id}`, {
+      const deleteShop = await axios.delete(`https://techassist-9iyg.onrender.com/techShops/deleteShop/${shopDetails._id}`, {
         headers: {
           "Content-Type": "multipart/form-data",
           "Authorization": `Bearer ${token}`
