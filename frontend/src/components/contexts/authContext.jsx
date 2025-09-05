@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
+import jwtDecode from "jwt-decode"; // ✅ correct import
 
 export const AuthContext = createContext();
 
@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
       const token = localStorage.getItem("token");
       const userId = localStorage.getItem("userId");
 
-      // ✅ allow open access to session routes
+      // ✅ if it's a session route, skip auth check completely
       if (location.pathname.startsWith("/session/")) {
         return;
       }
@@ -40,7 +40,10 @@ export const AuthProvider = ({ children }) => {
           setCurrUser(userId);
 
           // redirect logged-in users away from login/signup
-          if (location.pathname === "/login" || location.pathname === "/signup") {
+          if (
+            location.pathname === "/login" ||
+            location.pathname === "/signup"
+          ) {
             navigate("/");
           }
         }
