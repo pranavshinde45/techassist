@@ -2,9 +2,6 @@ const { StatusCodes } = require("http-status-codes");
 const { Technician } = require("../model/technicianModel");
 const TechShop = require("../model/techshopModel");
 
-const { StatusCodes } = require("http-status-codes");
-const { Technician } = require("../model/technicianModel");
-const TechShop = require("../model/techshopModel");
 
 const getAll = async (req, res) => {
   try {
