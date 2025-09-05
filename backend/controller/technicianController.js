@@ -2,46 +2,64 @@ const { StatusCodes } = require("http-status-codes");
 const { Technician } = require("../model/technicianModel");
 const TechShop = require("../model/techshopModel");
 
+const { StatusCodes } = require("http-status-codes");
+const { Technician } = require("../model/technicianModel");
+const TechShop = require("../model/techshopModel");
+
 const getAll = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const technicians = await Technician.find({ techshop: id}); // 🔥 Filter here
+  try {
+    const { shopId } = req.params; 
+    const technicians = await Technician.find({ techshop: shopId });
 
-        if (technicians.length === 0) {
-            return res.status(StatusCodes.NOT_FOUND).json({ message: "No technicians found" });
-        }
-
-        console.log(technicians);
-        res.status(StatusCodes.OK).json({ message: technicians });
-    } catch (err) {
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: err.message });
+    if (!technicians.length) {
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: "No technicians found" });
     }
-}
 
+    res.status(StatusCodes.OK).json({ message: technicians });
+  } catch (err) {
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: err.message });
+  }
+};
 
 const createTechnician = async (req, res) => {
-    let {shopId} = req.params;
-    console.log(shopId)
-    let {name, contact, qualification} = req.body;
-    if (!name || !contact || !qualification) {
-        return res.json({ message: "provide necessary details" });
+  const { shopId } = req.params;
+  const { name, contact, qualification } = req.body;
+
+  if (!name || !contact || !qualification) {
+    return res.json({ message: "Provide necessary details" });
+  }
+
+  try {
+    const shop = await TechShop.findById(shopId);
+    if (!shop) {
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: "Shop not found" });
     }
-    try{
-        const shop = await TechShop.findById(shopId);
-        console.log(shop)
-        const newTechnician = new Technician({
-            name: name,
-            contact: contact,
-            qualification: qualification
-        })
-        shop.technician.push(newTechnician._id);
-        await newTechnician.save();
-        await shop.save()
-        res.status(StatusCodes.CREATED).json({ message: "technician created successfully" })
-    } catch (err) {
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: err.message })
-    }
-}
+
+    const newTechnician = new Technician({
+      name,
+      contact,
+      qualification,
+      techshop: shopId, 
+    });
+
+    await newTechnician.save();
+
+    res
+      .status(StatusCodes.CREATED)
+      .json({ message: "Technician created successfully" });
+  } catch (err) {
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: err.message });
+  }
+};
+
 
 const getTechnician=async(req,res)=>{
     let {technicianId }=req.params;
