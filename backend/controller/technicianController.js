@@ -5,7 +5,7 @@ const TechShop = require("../model/techshopModel");
 const getAll = async (req, res) => {
     try {
         const { id } = req.params;
-        const technicians = await Technician.find({ shop: id}); // 🔥 Filter here
+        const technicians = await Technician.find({ techshop: id}); // 🔥 Filter here
 
         if (technicians.length === 0) {
             return res.status(StatusCodes.NOT_FOUND).json({ message: "No technicians found" });
