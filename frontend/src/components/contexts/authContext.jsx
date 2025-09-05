@@ -1,30 +1,29 @@
-import React, { createContext, useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
+import React, { createContext, useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
-
   const [currUser, setCurrUser] = useState(() => {
     return localStorage.getItem("userId") || null;
   });
 
   useEffect(() => {
     const checkAuth = () => {
-      const token = localStorage.getItem('token');
-      const userId = localStorage.getItem('userId');
+      const token = localStorage.getItem("token");
+      const userId = localStorage.getItem("userId");
 
-      // public route check
-      const isPublicRoute = location.pathname.startsWith("/session");
+      // ✅ allow open access to session routes
+      if (location.pathname.startsWith("/session/")) {
+        return;
+      }
 
       if (!token || !userId) {
-        setCurrUser(null);
-
-        if (!isPublicRoute) {
-          navigate('/login');
+        if (location.pathname !== "/login" && location.pathname !== "/signup") {
+          navigate("/login");
         }
         return;
       }
@@ -34,24 +33,21 @@ export const AuthProvider = ({ children }) => {
         const currentTime = Date.now() / 1000;
 
         if (decoded.exp < currentTime) {
-          console.warn("Token expired");
           localStorage.clear();
           setCurrUser(null);
-
-          if (!isPublicRoute) {
-            navigate('/login');
-          }
+          navigate("/login");
         } else {
           setCurrUser(userId);
+
+          // redirect logged-in users away from login/signup
+          if (location.pathname === "/login" || location.pathname === "/signup") {
+            navigate("/");
+          }
         }
       } catch (err) {
-        console.error("Invalid token:", err.message);
         localStorage.clear();
         setCurrUser(null);
-
-        if (!isPublicRoute) {
-          navigate('/login');
-        }
+        navigate("/login");
       }
     };
 
