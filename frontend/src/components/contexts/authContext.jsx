@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import jwtDecode from "jwt-decode"; // ✅ correct import
+import jwtDecode from "jwt-decode";
 
 export const AuthContext = createContext();
 
@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
         } else {
           setCurrUser(userId);
 
-          // redirect logged-in users away from login/signup
+         
           if (
             location.pathname === "/login" ||
             location.pathname === "/signup"
