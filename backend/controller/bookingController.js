@@ -18,7 +18,7 @@ const createBooking = async (req, res) => {
       return res.status(400).json({ msg: "This session time is already booked." });
     }
     const sessionId = uuidv4();
-    const sessionLink = serviceType === "remote" ? `http://localhost:3000/session/${sessionId}` : null;
+    const sessionLink = serviceType === "remote" ? `https://techassist-9iyg.onrender.com/session/${sessionId}` : null;
 
     const shop = await TechShop.findById(shopId);
 
