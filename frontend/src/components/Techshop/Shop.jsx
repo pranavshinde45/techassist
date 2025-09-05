@@ -17,6 +17,8 @@ function Shop() {
   const [reviewsLoading, setReviewsLoading] = useState(true);
   const [technician, setTechnician] = useState([])
   const { currUser } = useContext(AuthContext);
+
+  const token=localStorage.getItem("token");
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -45,7 +47,11 @@ function Shop() {
   useEffect(() => {
     async function get() {
       try {
-        const technician = await axios.get(`https://techassist-9iyg.onrender.com/techShops/${id}/technicians`)
+        const technician = await axios.get(`https://techassist-9iyg.onrender.com/techShops/${id}/technicians`,{
+          headers:{
+            Authorization:`Bearer ${token}`
+          }
+        })
         console.log(technician.data.message)
         setTechnician(technician?.data?.message)
       } catch (err) {
@@ -53,7 +59,7 @@ function Shop() {
       }
     }
     get()
-  }, [])
+  }, [id,token])
   if (!shopDetails || reviewsLoading) {
     return <ShopShimmer />;
   }
@@ -63,7 +69,6 @@ function Shop() {
     try {
       const deleteShop = await axios.delete(`https://techassist-9iyg.onrender.com/techShops/deleteShop/${shopDetails._id}`, {
         headers: {
-          "Content-Type": "multipart/form-data",
           "Authorization": `Bearer ${token}`
         }
       });
