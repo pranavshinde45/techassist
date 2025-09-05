@@ -6,7 +6,9 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
-  const [currUser, setCurrUser] = useState(null);
+  const [currUser, setCurrUser] = useState(() => {
+    return localStorage.getItem("userId") || null;
+  });
 
   useEffect(() => {
     const checkAuth = () => {

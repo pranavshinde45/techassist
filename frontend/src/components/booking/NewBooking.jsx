@@ -23,7 +23,7 @@ function NewBooking() {
 
     if (name === 'sessionTime') {
       try {
-        const res = await axios.get(`http://localhost:8000/techShops/${id}/checkSlot`, {
+        const res = await axios.get(`https://techassist-delta.vercel.app/techShops/${id}/checkSlot`, {
           params: { sessionTime: value }
         });
         setSlotAvailable(res.data.available);
