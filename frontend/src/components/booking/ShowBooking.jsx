@@ -92,7 +92,7 @@ function ShowBooking() {
                                     {booking.sessionLink && (
                                         <p className="card-text mb-1">
                                             <strong>Session Link:</strong>{' '}
-                                            <a href={booking.sessionLink} target="_blank" rel="noreferrer" className="text-decoration-underline text-info">
+                                            <a href={booking.sessionLink} rel="noreferrer" className="text-decoration-underline text-info">
                                                 Join Session
                                             </a>
                                         </p>
