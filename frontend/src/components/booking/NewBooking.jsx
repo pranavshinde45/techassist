@@ -15,22 +15,10 @@ function NewBooking() {
   });
 
   const [validated, setValidated] = useState(false);
-  const [slotAvailable, setSlotAvailable] = useState(true);
 
-  const handleChange = async (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-
-    if (name === 'sessionTime') {
-      try {
-        const res = await axios.get(`https://techassist-delta.vercel.app/techShops/${id}/checkSlot`, {
-          params: { sessionTime: value }
-        });
-        setSlotAvailable(res.data.available);
-      } catch (err) {
-        setSlotAvailable(true); // fallback
-      }
-    }
   };
 
   const handleSubmit = async (e) => {
@@ -42,17 +30,14 @@ function NewBooking() {
       return;
     }
 
-    if (!slotAvailable) {
-      alert('This time slot is already booked. Please choose another.');
-      return;
-    }
-
     const data = { ...formData, shopId: id };
 
     try {
-      const res = await axios.post(`https://techassist-9iyg.onrender.com/techShops/${id}/booking`, data, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      await axios.post(
+        `https://techassist-9iyg.onrender.com/techShops/${id}/booking`,
+        data,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
       navigate(`/shop/${id}`);
     } catch (err) {
       alert(err.response?.data?.message || 'Booking failed');
@@ -102,7 +87,9 @@ function NewBooking() {
                 required
                 pattern="[0-9]{10}"
               />
-              <div className="invalid-feedback">Please enter a valid 10-digit contact number.</div>
+              <div className="invalid-feedback">
+                Please enter a valid 10-digit contact number.
+              </div>
             </div>
 
             <div className="col-md-8">
@@ -152,7 +139,9 @@ function NewBooking() {
                   </label>
                 </div>
               </div>
-              <div className="invalid-feedback d-block">Please choose a service type.</div>
+              <div className="invalid-feedback d-block">
+                Please choose a service type.
+              </div>
             </div>
 
             <div className="col-md-8">
@@ -170,11 +159,6 @@ function NewBooking() {
               <div className="invalid-feedback">
                 Select a time between 9:00 AM and 10:00 PM today.
               </div>
-              {!slotAvailable && (
-                <div className="text-danger mt-1">
-                  Selected time is already booked. Please choose another.
-                </div>
-              )}
             </div>
 
             <div className="col-12">
