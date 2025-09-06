@@ -23,8 +23,9 @@ const io = socketIo(server, {
 });
 
 const allowedOrigins = [
-  "http://localhost:3000", // local dev
-  "https://techassist-git-main-pranav-shindes-projects-9da17069.vercel.app" // deployed frontend
+  "http://localhost:3000",
+  "https://techassist-delta.vercel.app", // your current deployed frontend
+  "https://techassist-git-main-pranav-shindes-projects-9da17069.vercel.app"
 ];
 
 const corsOptions = {
@@ -37,6 +38,7 @@ const corsOptions = {
   },
   credentials: true,
 };
+
 
 app.use(cors(corsOptions));
 app.use(express.json());
